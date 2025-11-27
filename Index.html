@@ -1,275 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kalkulator Purata Nilai Gred MRSM</title>
-    <script>
-        function calculatePNG(isFormative) {
-            let nama = document.getElementById("nama").value;
-            let melayu = parseFloat(document.getElementById("melayu").value);
-            let inggeris = parseFloat(document.getElementById("inggeris").value);
-            let math = parseFloat(document.getElementById("math").value);
-            let sci = parseFloat(document.getElementById("sci").value);
-            let reka = parseFloat(document.getElementById("reka").value);
-            let islam = parseFloat(document.getElementById("islam").value);
-            let sj = parseFloat(document.getElementById("sj").value);
-            let geog = parseFloat(document.getElementById("geog").value);
-            let ask = isFormative ? null : parseFloat(document.getElementById("ask").value);
-            let psv = isFormative ? null : parseFloat(document.getElementById("psv").value);
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kalkulator PNG MRSM</title>
+<style>
+    body {
+        background: lightblue;
+        text-align: center;
+        font-family: Arial, sans-serif;
+    }
+    h1 {
+        margin-bottom: 5px;
+    }
+    .section {
+        margin: 15px 0;
+    }
+    label {
+        display: block;
+        margin: 8px 0 3px 0;
+        font-weight: bold;
+    }
+    input[type="text"], input[type="number"] {
+        padding: 5px;
+        width: 120px;
+        text-align: center;
+        font-size: 16px;
+    }
+    button {
+        padding: 8px 16px;
+        font-size: 16px;
+        margin-top: 15px;
+        cursor: pointer;
+    }
+</style>
+<script>
+function calculatePNG(isFormative) {
+    let nama = document.getElementById("nama").value;
 
-            // Helper function to calculate grade
-            function getGPA(score) {
-                if (score >= 80) return 4.00;
-                if (score >= 75) return 3.75;
-                if (score >= 70) return 3.50;
-                if (score >= 65) return 3.25;
-                if (score >= 60) return 3.00;
-                if (score >= 55) return 2.75;
-                if (score >= 50) return 2.50;
-                if (score >= 45) return 2.25;
-                if (score >= 40) return 2.00;
-                if (score >= 35) return 1.00;
-                return 0.00;
-            }
+    let melayu = parseFloat(document.getElementById("melayu").value);
+    let inggeris = parseFloat(document.getElementById("inggeris").value);
+    let math = parseFloat(document.getElementById("math").value);
+    let addmath = parseFloat(document.getElementById("addmath").value);
+    let phy = parseFloat(document.getElementById("phy").value);
+    let chem = parseFloat(document.getElementById("chem").value);
+    let bio = parseFloat(document.getElementById("bio").value);
+    let sej = parseFloat(document.getElementById("sej").value);
+    let islam = parseFloat(document.getElementById("islam").value);
+    let pj = isFormative ? null : parseFloat(document.getElementById("pj").value);
 
-            // Calculate GPA for each subject
-            let bm = getGPA(melayu) * 5.00;
-            let bi = getGPA(inggeris) * 5.00;
-            let mt = getGPA(math) * 5.00;
-            let sn = getGPA(sci) * 5.00;
-            let rbt = getGPA(reka) * 4.00;
-            let pai = getGPA(islam) * 4.00;
-            let sej = getGPA(sj) * 3.00;
-            let geo = getGPA(geog) * 3.00;
+    function gradeBM(score){if(score>=85)return 4;if(score>=80)return 3.67;if(score>=75)return 3.33;if(score>=70)return 3;if(score>=65)return 2.67;if(score>=60)return 2.33;if(score>=55)return 2;if(score>=50)return 1.67;if(score>=45)return 1.33;if(score>=40)return 1;return 0;}
+    function gradeBI(score){if(score>=80)return 4;if(score>=75)return 3.67;if(score>=70)return 3.33;if(score>=65)return 3;if(score>=60)return 2.67;if(score>=55)return 2.33;if(score>=50)return 2;if(score>=45)return 1.67;if(score>=40)return 1.33;if(score>=35)return 1;return 0;}
+    function gradeMath(score){return gradeBI(score);}
+    function gradeAddMath(score){if(score>=75)return 4;if(score>=65)return 3.67;if(score>=60)return 3.33;if(score>=55)return 3;if(score>=50)return 2.67;if(score>=45)return 2.33;if(score>=40)return 2;if(score>=35)return 1.67;if(score>=30)return 1.33;if(score>=25)return 1;return 0;}
+    function gradePhy(score){if(score>=75)return 4;if(score>=70)return 3.67;if(score>=65)return 3.33;if(score>=60)return 3;if(score>=55)return 2.67;if(score>=50)return 2.33;if(score>=45)return 2;if(score>=40)return 1.67;if(score>=35)return 1.33;if(score>=30)return 1;return 0;}
+    function gradeChem(score){return gradePhy(score);}
+    function gradeBio(score){return gradePhy(score);}
+    function gradeSej(score){if(score>=85)return 4;if(score>=80)return 3.67;if(score>=75)return 3.33;if(score>=70)return 3;if(score>=65)return 2.67;if(score>=60)return 2.33;if(score>=55)return 2;if(score>=50)return 1.67;if(score>=45)return 1.33;if(score>=40)return 1;return 0;}
+    function gradeIslam(score){return gradeSej(score);}
+    function gradePJ(score){return gradeSej(score);}
 
+    let Bm = gradeBM(melayu)*6;
+    let Bi = gradeBI(inggeris)*6;
+    let Mt = gradeMath(math)*6;
+    let Admt = gradeAddMath(addmath)*6;
+    let Sic = gradePhy(phy)*6;
+    let Kim = gradeChem(chem)*6;
+    let Gy = gradeBio(bio)*6;
+    let Sj = gradeSej(sej)*4;
+    let Pi = gradeIslam(islam)*5;
+    let Pe = isFormative ? 0 : gradePJ(pj)*2;
 
-            let totalSubjects = 34;
-            let additionalMarks ="";
+    let total = Bm+Bi+Mt+Admt+Sic+Kim+Gy+Sj+Pi+Pe;
+    let purata = isFormative ? total/51 : total/53;
 
+    document.getElementById("result").innerHTML = "PNG anda ialah: " + purata.toFixed(3);
 
-            if (!isFormative) {
-                let Ask = getGPA(ask) * 2.00;
-                let Seni = getGPA(psv) * 2.00;
-                totalSubjects = 38;
-                additionalMarks = Ask + Seni;
-            }
-
-            let total = bm + bi + mt + sn + rbt + pai + sej + geo + (additionalMarks || 0);
-            let purata = total / totalSubjects;
-
-            // Display result
-            document.getElementById("result").innerHTML = "PNG anda ialah: " + purata.toFixed(2);
-
-            // Motivational message
-            let message = "";
-            if (purata === 4.00) {
-                message = "Tahniah " + nama + "!, Anda mendapat pointer 4.00. Kekalkan prestasi anda.";
-            } else if (purata >= 3.50) {
-                message = "Tahniah " + nama + "!, Teruskan usaha anda.";
-            } else if (purata >= 3.00) {
-                message = "Anda sudah lakukan yang terbaik, " + nama + "! Cuba Lagi dalam ujian seterusnya.";
-            } else {
-                message = "Jangan putus asa, " + nama + ". Teruskan berusaha dengan lebih gigih.";
-            }
-            document.getElementById("message").innerHTML = message;
-        }
-    </script>
+    let message = "";
+    if(purata===4){message="Tahniah "+nama+"!, Anda mendapat pointer 4.00. Kekalkan prestasi anda.";}
+    else if(purata>=3.50){message="Tahniah "+nama+"!, Teruskan usaha anda.";}
+    else if(purata>=3){message="Anda sudah lakukan yang terbaik, "+nama+"! Cuba Lagi dalam ujian seterusnya.";}
+    else{message="Jangan putus asa, "+nama+". Teruskan berusaha dengan lebih gigih.";}
+    document.getElementById("message").innerHTML = message;
+}
+</script>
 </head>
-<body style="background: linear-gradient(lightblue, lightblue);">
-  <center
-    <h1><img src="MARA.png" style="width:33px;height:33px;">    Kalkulator PNG    <img src="MRSM.png" style="width:38px;height:33px;"></h1>
-    <h3>Lowerform Student</h3>
-    <br>
-    <p>Sila tulis mengikut ejaan yang betul dan tepat❗</p>
+<body>
+<h1>Kalkulator PNG MRSM</h1>
 
+<div class="section">
     <label>Adakah ini Ujian Formatif?</label>
-    <input type="radio" id="formative-no" name="formative" value="Tidak" checked onclick="toggleExtraFields(false)"> Ya
-    <input type="radio" id="formative-yes" name="formative" value="Ya" onclick="toggleExtraFields(true)"> Tidak
+    <input type="checkbox" id="formative" onclick="document.getElementById('extra-fields').style.display=this.checked?'none':'block';">
+</div>
 
-    <br><br>
-
-    <label for="nama">Sila masukkan nama anda:</label>
+<div class="section">
+    <label>Sila tulis nama anda:</label>
     <input type="text" id="nama">
+</div>
 
-    <h3>Masukkan Markah:</h3>
-    <label for="melayu">Bahasa Melayu📚:<br></label>
-    <input type="number" id="melayu"><br>
-    <label for="inggeris">English 📖:<br></label>
-    <input type="number" id="inggeris"><br>
-    <label for="math">Matematik🧮:<br></label>
-    <input type="number" id="math"><br>
-    <label for="sci">Sains🧪:<br></label>
-    <input type="number" id="sci"><br>
-    <label for="reka">RBT🛠️:<br></label>
-    <input type="number" id="reka"><br>
-    <label for="islam">PAI🕌:<br></label>
-    <input type="number" id="islam"><br>
-    <label for="sj">Sejarah📜:<br></label>
-    <input type="number" id="sj"><br>
-    <label for="geog">Geografi🗺️:<br></label>
-    <input type="number" id="geog"><br>
-
-    <!-- These fields will be hidden if it's a formative test -->
-    <div id="extra-fields" style="display:none;">
-        <label for="psv">PSV🎨🖌️:<br></label>
-        <input type="number" id="psv"><br>
-        <label for="ask">PJ⚽:<br></label>
-        <input type="number" id="ask"><br>
+<div class="section">
+    <label>Bahasa Melayu</label>
+    <input type="number" id="melayu">
+    <label>English</label>
+    <input type="number" id="inggeris">
+    <label>Matematik</label>
+    <input type="number" id="math">
+    <label>Matematik Tambahan</label>
+    <input type="number" id="addmath">
+    <label>Fizik</label>
+    <input type="number" id="phy">
+    <label>Kimia</label>
+    <input type="number" id="chem">
+    <label>Biologi</label>
+    <input type="number" id="bio">
+    <label>Sejarah</label>
+    <input type="number" id="sej">
+    <label>Pendidikan Islam</label>
+    <input type="number" id="islam">
+    <div id="extra-fields">
+        <label>Pendidikan Jasmani</label>
+        <input type="number" id="pj">
     </div>
+</div>
 
-    <br>
-    <button onclick="calculatePNG(document.getElementById('formative-no').checked)">Kira PNG🔎</button>
+<button onclick="calculatePNG(document.getElementById('formative').checked)">Kira PNG</button>
 
-    <ul><p><small><small>'MJSCMuo'product, Waldann</small></small></p></ul>
-    <h3>Keputusan:</h3>
-    <p id="result"></p>
-    <p id="message"></p>
-
-
-    <script>
-        function toggleExtraFields(show) {
-            document.getElementById('extra-fields').style.display = show ? 'block' : 'none';
-        }
-    </script>
-  </center>
+<h3>Keputusan:</h3>
+<p id="result"></p>
+<p id="message"></p>
 </body>
-  </html>
-      <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kalkulator Purata Nilai Gred MRSM</title>
-    <script>
-        function calculatePNG(isFormative) {
-            let nama = document.getElementById("nama").value;
-            let melayu = parseFloat(document.getElementById("melayu").value);
-            let inggeris = parseFloat(document.getElementById("inggeris").value);
-            let math = parseFloat(document.getElementById("math").value);
-            let sci = parseFloat(document.getElementById("sci").value);
-            let reka = parseFloat(document.getElementById("reka").value);
-            let islam = parseFloat(document.getElementById("islam").value);
-            let sj = parseFloat(document.getElementById("sj").value);
-            let geog = parseFloat(document.getElementById("geog").value);
-            let ask = isFormative ? null : parseFloat(document.getElementById("ask").value);
-            let psv = isFormative ? null : parseFloat(document.getElementById("psv").value);
-
-            // Helper function to calculate grade
-            function getGPA(score) {
-                if (score >= 80) return 4.00;
-                if (score >= 75) return 3.75;
-                if (score >= 70) return 3.50;
-                if (score >= 65) return 3.25;
-                if (score >= 60) return 3.00;
-                if (score >= 55) return 2.75;
-                if (score >= 50) return 2.50;
-                if (score >= 45) return 2.25;
-                if (score >= 40) return 2.00;
-                if (score >= 35) return 1.00;
-                return 0.00;
-            }
-
-            // Calculate GPA for each subject
-            let bm = getGPA(melayu) * 5.00;
-            let bi = getGPA(inggeris) * 5.00;
-            let mt = getGPA(math) * 5.00;
-            let sn = getGPA(sci) * 5.00;
-            let rbt = getGPA(reka) * 4.00;
-            let pai = getGPA(islam) * 4.00;
-            let sej = getGPA(sj) * 3.00;
-            let geo = getGPA(geog) * 3.00;
-
-
-            let totalSubjects = 34;
-            let additionalMarks ="";
-
-
-            if (!isFormative) {
-                let Ask = getGPA(ask) * 2.00;
-                let Seni = getGPA(psv) * 2.00;
-                totalSubjects = 38;
-                additionalMarks = Ask + Seni;
-            }
-
-            let total = bm + bi + mt + sn + rbt + pai + sej + geo + (additionalMarks || 0);
-            let purata = total / totalSubjects;
-
-            // Display result
-            document.getElementById("result").innerHTML = "PNG anda ialah: " + purata.toFixed(2);
-
-            // Motivational message
-            let message = "";
-            if (purata === 4.00) {
-                message = "Tahniah " + nama + "!, Anda mendapat pointer 4.00. Kekalkan prestasi anda.";
-            } else if (purata >= 3.50) {
-                message = "Tahniah " + nama + "!, Teruskan usaha anda.";
-            } else if (purata >= 3.00) {
-                message = "Anda sudah lakukan yang terbaik, " + nama + "! Cuba Lagi dalam ujian seterusnya.";
-            } else {
-                message = "Jangan putus asa, " + nama + ". Teruskan berusaha dengan lebih gigih.";
-            }
-            document.getElementById("message").innerHTML = message;
-        }
-    </script>
-</head>
-<body style="background: linear-gradient(lightblue, lightblue);">
-  <center
-    <h1><img src="MARA.png" style="width:33px;height:33px;">    Kalkulator PNG    <img src="MRSM.png" style="width:38px;height:33px;"></h1>
-    <h3>Lowerform Student</h3>
-    <br>
-    <p>Sila tulis mengikut ejaan yang betul dan tepat❗</p>
-
-    <label>Adakah ini Ujian Formatif?</label>
-    <input type="radio" id="formative-no" name="formative" value="Tidak" checked onclick="toggleExtraFields(false)"> Ya
-    <input type="radio" id="formative-yes" name="formative" value="Ya" onclick="toggleExtraFields(true)"> Tidak
-
-    <br><br>
-
-    <label for="nama">Sila masukkan nama anda:</label>
-    <input type="text" id="nama">
-
-    <h3>Masukkan Markah:</h3>
-    <label for="melayu">Bahasa Melayu📚:<br></label>
-    <input type="number" id="melayu"><br>
-    <label for="inggeris">English 📖:<br></label>
-    <input type="number" id="inggeris"><br>
-    <label for="math">Matematik🧮:<br></label>
-    <input type="number" id="math"><br>
-    <label for="sci">Sains🧪:<br></label>
-    <input type="number" id="sci"><br>
-    <label for="reka">RBT🛠️:<br></label>
-    <input type="number" id="reka"><br>
-    <label for="islam">PAI🕌:<br></label>
-    <input type="number" id="islam"><br>
-    <label for="sj">Sejarah📜:<br></label>
-    <input type="number" id="sj"><br>
-    <label for="geog">Geografi🗺️:<br></label>
-    <input type="number" id="geog"><br>
-
-    <!-- These fields will be hidden if it's a formative test -->
-    <div id="extra-fields" style="display:none;">
-        <label for="psv">PSV🎨🖌️:<br></label>
-        <input type="number" id="psv"><br>
-        <label for="ask">PJ⚽:<br></label>
-        <input type="number" id="ask"><br>
-    </div>
-
-    <br>
-    <button onclick="calculatePNG(document.getElementById('formative-no').checked)">Kira PNG🔎</button>
-
-    <ul><p><small><small>'MJSCMuo'product, Waldann</small></small></p></ul>
-    <h3>Keputusan:</h3>
-    <p id="result"></p>
-    <p id="message"></p>
-
-
-    <script>
-        function toggleExtraFields(show) {
-            document.getElementById('extra-fields').style.display = show ? 'block' : 'none';
-        }
-    </script>
-  </center>
-</body>
-  </html>
-      
+</html>
